@@ -13,23 +13,35 @@ This Ansible playbook helps initialize a Kubernetes cluster on a single-host.  J
 # Start the playbook and install Kubernetes
 ./main.yaml
 
-# Setup the KUBECONFIG environment variable
+# Setup the KUBECONFIG env variable and look around
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
 kubectl get nodes
 # NAME     STATUS   ROLES    AGE   VERSION
-# kube-1   Ready    <none>   33m   v1.25.6
+# kube-1   Ready    <none>   98s   v1.25.8
+
+kubectl get pods -A
+# NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE
+# kube-system   calico-kube-controllers-567c56ff98-rjnrs   1/1     Running   0          2m28s
+# kube-system   calico-node-jwssl                          1/1     Running   0          2m28s
+# kube-system   coredns-565d847f94-7nzht                   1/1     Running   0          2m44s
+# kube-system   coredns-565d847f94-7w2l5                   1/1     Running   0          2m44s
+# kube-system   etcd-kube-1                                1/1     Running   0          2m59s
+# kube-system   kube-apiserver-kube-1                      1/1     Running   0          2m59s
+# kube-system   kube-controller-manager-kube-1             1/1     Running   0          2m59s
+# kube-system   kube-proxy-t642b                           1/1     Running   0          2m44s
+# kube-system   kube-scheduler-kube-1                      1/1     Running   0          2m58s
 
 # Print the worker node join command
 kubeadm token create --print-join-command
 ```
 
-### Adding worker nodes
-- Run the playbook with only `sysprep`.  Otherwise it will start another bootstrap node.
+### Adding worker nodes to the cluster
+- Run the playbook with _only_ `sysprep`.
 ```
  ./main.yml -t sysprep
 
-# Run the kubeadm join command that the control plane node outputted from `kubeadm token create --print-join-command`
+# Run the join command output from `kubeadm token create --print-join-command` on the bootstrap node
 # kubeadm join ...
 
 # Verify on a node that has a KUBECONFIG file for the cluster
