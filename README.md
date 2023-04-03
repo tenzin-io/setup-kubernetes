@@ -1,7 +1,7 @@
 # README
 This Ansible playbook helps initialize a Kubernetes cluster on a single-host.  Joining more nodes, requires only performing the `sysprep` role and applying the join command.
 
-## Operating system
+**Supported operating system**
 - Debian 11
 
 ## Usage
@@ -10,9 +10,10 @@ This Ansible playbook helps initialize a Kubernetes cluster on a single-host.  J
 - Setup the bootstrap node.  This bootstrap node is the first node in the Kubernetes cluster.
 
 ```
-# Start the playbook
+# Start the playbook and install Kubernetes
 ./main.yaml
 
+# Setup the KUBECONFIG environment variable
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
 kubectl get nodes
@@ -37,3 +38,8 @@ kubectl get nodes
 # kube-1   Ready    <none>   38m    v1.25.6
 # kube-2   Ready    <none>   107s   v1.25.6
 ```
+### Component release pages
+- <https://containerd.io/downloads/#releases>
+- <https://github.com/opencontainers/runc/releases>
+- <https://github.com/containernetworking/plugins/releases>
+- <https://github.com/projectcalico/calico/releases>
