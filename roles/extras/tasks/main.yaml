@@ -1,0 +1,3 @@
+- name: Include the task for setting up rancher/local-host-provisioner
+  include_tasks: rancher-local-host-provisioner.yaml
+  when: "'rancher/local-path-provisioner' in extra_kubernetes_addons"

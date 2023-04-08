@@ -1,0 +1,15 @@
+- debug:
+    msg: "Setting up rancher/local-host-provisioner"
+
+- name: Ensure that /opt folder exists
+  file:
+    path: /opt
+    state: directory
+
+- name: Get the deployment manifest
+  command: curl -o /opt/local-host-provisioner.yaml -L "https://raw.githubusercontent.com/rancher/local-path-provisioner/{{ local_host_provisioner_version }}/deploy/local-path-storage.yaml"
+  args:
+    creates: /opt/local-host-provisioner.yaml
+
+- name: Apply the manifest
+  command: kubectl apply -f /opt/local-host-provisioner.yaml
