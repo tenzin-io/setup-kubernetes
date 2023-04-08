@@ -13,6 +13,10 @@
     pod_network_cidr: 10.10.0.0/16
     service_network_cidr: 10.255.0.0/16
 
+    # enable add-ons
+    extra_kubernetes_addons:
+      - "rancher/local-path-provisioner"
+
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
 
@@ -24,3 +28,7 @@
     - role: kubernetes
       tags:
         - kubernetes
+
+    - role: extras
+      tags:
+        - extras
