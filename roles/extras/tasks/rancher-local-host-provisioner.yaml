@@ -12,4 +12,11 @@
     creates: /opt/local-host-provisioner.yaml
 
 - name: Apply the manifest
-  command: kubectl apply -f /opt/local-host-provisioner.yaml
+  shell: kubectl apply -f /opt/local-host-provisioner.yaml && touch /opt/local-host-provisioner.deployed
+  args:
+    creates: /opt/local-host-provisioner.deployed
+
+- name: Make local-path the default provisioner
+  shell: "kubectl patch storageclass local-path -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}' && touch /opt/local-host-provisioner.is_default"
+  args:
+    creates: /opt/local-host-provisioner.is_default
