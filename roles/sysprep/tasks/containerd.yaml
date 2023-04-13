@@ -3,11 +3,19 @@
 #
 # Install containerd container rumtime
 #
-- name: Extract containerd tarball
+- name: Extract containerd tarball x86_64
   unarchive:
     src: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-amd64.tar.gz"
     dest: /usr/local/
     remote_src: yes
+  when: ansible_machine == "x86_64"
+
+- name: Extract containerd tarball aarch64
+  unarchive:
+    src: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-arm64.tar.gz"
+    dest: /usr/local/
+    remote_src: yes
+  when: ansible_machine == "aarch64"
 
 - name: Create containerd config folder
   file:
