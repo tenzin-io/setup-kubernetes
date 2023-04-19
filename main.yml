@@ -27,14 +27,14 @@
       tags:
         - sysprep
 
-    - role: kubernetes
-      tags:
-        - kubernetes
-
     - role: nvidia
       when: enable_nvidia == true
       tags:
         - nvidia
+
+    - role: kubernetes
+      tags:
+        - kubernetes
 
     - role: extras
       tags:
