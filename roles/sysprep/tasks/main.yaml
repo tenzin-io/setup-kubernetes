@@ -2,11 +2,14 @@
 - name: System prep for Kubernetes
   include_tasks: sysprep.yaml
 
-- name: Setup containerd
-  include_tasks: containerd.yaml
+- name: Setup Nvidia node
+  include_tasks: nvidia.yaml
 
 - name: Setup runc
   include_tasks: runc.yaml
+
+- name: Setup containerd
+  include_tasks: containerd.yaml
 
 - name: Setup CNI plugins
   include_tasks: cni_plugins.yaml
@@ -16,3 +19,7 @@
 
 - name: Install kubeadm, kubelet, kubectl binaries
   include_tasks: kubernetes.yaml
+
+- name: Reboot the machine (Wait for 5 min)
+  reboot:
+    reboot_timeout: 300

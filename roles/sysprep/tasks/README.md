@@ -1,9 +1,11 @@
 # README
+
+## Nvidia
 Helpful links
 - Nvidia Kubernetes installation guide: <https://docs.nvidia.com/datacenter/cloud-native/kubernetes/install-k8s.html#install-k8s>.
 - Linux driver downloads: <https://download.nvidia.com/XFree86/Linux-x86_64>.
 
-## Node setup
+### Nvidia node setup
 - A set of notes during my Nvidia VM setup.
 ```
 ESXi Host BIOS setup:
@@ -36,7 +38,7 @@ Found here: https://download.nvidia.com/XFree86/Linux-x86_64
 ./NVIDIA-Linux-x86_64-530.41.03.run -m=kernel-open  --disable-nouveau --silent
 ```
 
-### Example output
+#### Example output
 ```
 ❯ nvidia-smi
 Tue Apr 18 22:07:21 2023

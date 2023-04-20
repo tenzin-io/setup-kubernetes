@@ -1,5 +1,5 @@
 ---
-- name: Install pre-reqs
+- name: Install Nvidia driver pre-reqs
   apt:
     name: '{{ item }}'
     state: present
@@ -7,7 +7,7 @@
     - 'linux-headers-{{ ansible_kernel }}'
     - build-essential
 
-- name: Download Nvidia drivers
+- name: Download Nvidia driver
   command: curl -L -o /tmp/nvidia_driver.run "https://download.nvidia.com/XFree86/Linux-x86_64/530.41.03/NVIDIA-Linux-x86_64-530.41.03.run"
   args:
     creates: /tmp/nvidia_driver.run
@@ -22,14 +22,14 @@
   args:
     creates: /usr/bin/nvidia-smi
 
-- name: Create module file
+- name: Create nvidia.conf
   copy:
     dest: /etc/modprobe.d/nvidia.conf
     content: |-
       options nvidia NVreg_OpenRmEnableUnsupportedGpus=1
   notify: update-initramfs
 
-- name: Add the nvidia-docker key
+- name: Add the nvidia-docker repo key
   apt_key:
     url: https://nvidia.github.io/nvidia-docker/gpgkey
     state: present
