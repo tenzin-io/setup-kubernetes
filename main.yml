@@ -1,6 +1,4 @@
-
 #!/usr/local/bin/ansible-playbook
-#
 ---
 - name: Determine Kubernetes node to bootstrap
   connection: local
