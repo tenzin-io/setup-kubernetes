@@ -1,8 +1,29 @@
+
 #!/usr/local/bin/ansible-playbook
+#
 ---
-- name: Deploy a Kubernetes cluster
-  hosts: localhost
+- name: Determine Kubernetes node to bootstrap
   connection: local
+  hosts: localhost
+  gather_facts: false
+  vars_prompt:
+    - name: kubernetes_bootstrap_node
+      prompt: Kubernetes bootstrap node?
+      private: no
+
+  tasks:
+    - name: Adding bootstrap node to inventory
+      debug:
+        msg: '{{ kubernetes_bootstrap_node }}'
+
+    - name: Adding bootstrap node to inventory
+      add_host:
+        hostname: '{{ kubernetes_bootstrap_node }}'
+        groups:
+          - kubernetes_bootstrap_node
+
+- name: Install Kubernetes
+  hosts: kubernetes_bootstrap_node
   vars:
     kubernetes_version: 1.25.8
     containerd_version: 1.7.0
@@ -27,11 +48,6 @@
       tags:
         - sysprep
 
-    - role: nvidia
-      when: enable_nvidia == true
-      tags:
-        - nvidia
-
     - role: kubernetes
       tags:
         - kubernetes
@@ -39,3 +55,4 @@
     - role: extras
       tags:
         - extras
+...
