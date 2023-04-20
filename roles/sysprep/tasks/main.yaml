@@ -4,6 +4,7 @@
 
 - name: Setup Nvidia node
   include_tasks: nvidia.yaml
+  when: enable_nvidia_node == true
 
 - name: Setup runc
   include_tasks: runc.yaml
@@ -19,7 +20,3 @@
 
 - name: Install kubeadm, kubelet, kubectl binaries
   include_tasks: kubernetes.yaml
-
-- name: Reboot the machine (Wait for 5 min)
-  reboot:
-    reboot_timeout: 300

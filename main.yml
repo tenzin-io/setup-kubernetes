@@ -32,7 +32,7 @@
     pod_network_cidr: 10.10.0.0/16
     service_network_cidr: 10.255.0.0/16
 
-    enable_nvidia: false
+    enable_nvidia_node: false
 
     # enable add-ons
     extra_kubernetes_addons:
