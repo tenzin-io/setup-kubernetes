@@ -13,12 +13,20 @@
     - name: Adding bootstrap node to inventory
       debug:
         msg: '{{ kubernetes_bootstrap_node }}'
+      tags:
+        - sysprep
+        - kubernetes
+        - extras
 
     - name: Adding bootstrap node to inventory
       add_host:
         hostname: '{{ kubernetes_bootstrap_node }}'
         groups:
           - kubernetes_bootstrap_node
+      tags:
+        - sysprep
+        - kubernetes
+        - extras
 
 - name: Install Kubernetes
   hosts: kubernetes_bootstrap_node
@@ -32,7 +40,7 @@
     pod_network_cidr: 10.10.0.0/16
     service_network_cidr: 10.255.0.0/16
 
-    enable_nvidia_node: false
+    enable_nvidia_node: true
 
     # enable add-ons
     extra_kubernetes_addons:
