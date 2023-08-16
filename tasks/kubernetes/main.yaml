@@ -1,4 +1,10 @@
 ---
+- name: Update /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '.* {{ kubernetes_control_plane_endpoint_name }}$'
+    line: "{{ kubernetes_control_plane_endpoint_address }}  {{ kubernetes_control_plane_endpoint_name }}"
+  
 - name: Send over kubeadm config file
   template:
     src: kubeadm-init.yaml
@@ -10,7 +16,7 @@
     creates: /etc/kubernetes/admin.conf
 
 - name: Wait for port 6443 to be ready
-  ansible.builtin.wait_for:
+  wait_for:
     host: 127.0.0.1
     port: 6443
     delay: 30
@@ -22,3 +28,5 @@
 
 - name: Apply the Calico custom resources
   command: kubectl apply -f /etc/kubernetes/calico.yaml
+  environment:
+    KUBECONFIG: /etc/kubernetes/admin.conf

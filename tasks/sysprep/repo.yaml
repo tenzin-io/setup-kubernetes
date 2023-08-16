@@ -1,7 +1,7 @@
 ---
-- name: Install Debian OS packages
+- name: Install packages
   apt:
-    name: '{{ package }}'
+    name: '{{ item }}'
     state: latest
     update_cache: True
   loop:
@@ -9,8 +9,6 @@
     - ca-certificates
     - curl
     - gnupg
-  loop_control:
-    loop_var: package
 
 - name: Install Kubernetes repo key
   apt_key:

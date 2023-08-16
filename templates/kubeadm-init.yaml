@@ -5,11 +5,12 @@ apiServer:
   extraArgs:
     anonymous-auth: "true"
     enable-admission-plugins: "NodeRestriction,NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,ResourceQuota"
-controlPlaneEndpoint: "{{ kubernetes_control_plane_endpoint }}"
+controlPlaneEndpoint: "{{ kubernetes_control_plane_endpoint_name }}"
 networking:
   serviceSubnet: "{{ service_network_cidr }}"
   podSubnet: "{{ pod_network_cidr }}"
 ...
+
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: InitConfiguration

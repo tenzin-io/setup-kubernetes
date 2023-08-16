@@ -1,1 +1,0 @@
-kubernetes_control_plane_endpoint: "{{ ansible_facts['hostname'] }}.{{ ansible_facts['domain'] }}"
