@@ -30,3 +30,8 @@
   command: kubectl apply -f /etc/kubernetes/calico.yaml
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
+
+- name: Read the admin.conf file
+  slurp:
+    src: /etc/kubernetes/admin.conf
+  register: kubernetes_admin_conf
