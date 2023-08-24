@@ -9,6 +9,7 @@
     - ca-certificates
     - curl
     - gnupg
+    - nfs-common
 
 - name: Install Kubernetes repo key
   apt_key:
