@@ -2,8 +2,8 @@
 - name: Update /etc/hosts
   lineinfile:
     path: /etc/hosts
-    regexp: '.* {{ kubernetes_control_plane_endpoint_name }}$'
-    line: "{{ kubernetes_control_plane_endpoint_address }}  {{ kubernetes_control_plane_endpoint_name }}"
+    regexp: '.* {{ control_plane_endpoint_name }}$'
+    line: "{{ control_plane_endpoint_address }}  {{ control_plane_endpoint_name }}"
   
 - name: Send over kubeadm config file
   template:

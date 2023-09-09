@@ -23,3 +23,24 @@
     state: present
     filename: kubernetes
 
+- name: Install kubeadm, kubelet, kubectl binaries
+  apt:
+    name: '{{ item }}={{ kubernetes_version }}-00'
+    update_cache: True
+    allow_downgrades: True
+  loop:
+    - kubeadm
+    - kubelet
+    - kubectl
+
+- name: Hold the installed kubeadm, kubelet, kubectl packages to prevent upgrades
+  dpkg_selections:
+    name: '{{ item }}'
+    selection: hold
+  loop:
+    - kubeadm
+    - kubelet
+    - kubectl
+
+- name: Pull the kubeadm images
+  command: kubeadm config images pull

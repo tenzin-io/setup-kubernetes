@@ -4,15 +4,9 @@ kind: ClusterConfiguration
 apiServer:
   extraArgs:
     anonymous-auth: "true"
-controlPlaneEndpoint: "{{ kubernetes_control_plane_endpoint_name }}"
+controlPlaneEndpoint: "{{ control_plane_endpoint_name }}"
 networking:
   serviceSubnet: "{{ service_network_cidr }}"
   podSubnet: "{{ pod_network_cidr }}"
-...
 
----
-apiVersion: kubeadm.k8s.io/v1beta3
-kind: InitConfiguration
-skipPhases:
-  - mark-control-plane
 ...
