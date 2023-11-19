@@ -4,5 +4,5 @@ pod_network_cidr: 10.10.0.0/16
 service_network_cidr: 10.254.0.0/16
 
 # keepalived
-keepalived__router_id: 100
+keepalived_router_id: 100
 keepalived_cluster_password: clusterpass
