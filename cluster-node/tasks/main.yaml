@@ -24,3 +24,6 @@
 
 - include_tasks: worker-node.yaml
   when: "'worker_nodes' in group_names"
+
+- include_tasks: keepalived-cluster.yaml
+  when: "'bootstrap_node' in group_names or 'control_plane' in group_names"
