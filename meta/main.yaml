@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: setup-kubernetes
+  description: A role to help install Kubernetes on Debian hosts
+  author: Tenzin Lhakhang
+  company: tenzin.io
+  license: MIT
+
+  min_ansible_version: 2.14
+  platforms:
+    - name: Debian
+      versions:
+        - 12
+        - bookworm
