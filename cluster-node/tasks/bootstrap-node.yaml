@@ -1,4 +1,6 @@
 ---
+- include_tasks: keepalived-cluster.yaml
+
 - name: Update /etc/hosts
   lineinfile:
     path: /etc/hosts
