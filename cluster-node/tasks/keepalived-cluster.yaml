@@ -28,3 +28,5 @@
     src: keepalived.conf
     dest: /etc/keepalived/keepalived.conf
   notify: restart keepalived
+
+- meta: flush_handlers
