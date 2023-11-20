@@ -12,6 +12,9 @@
       - ansible_facts["distribution"] == "Debian"
       - groups["bootstrap_node"] | length == 1
 
+- include_tasks: keepalived-cluster.yaml
+  when: "'bootstrap_node' in group_names or 'control_plane' in group_names"
+
 - name: Get the bootstrap node hostname
   set_fact:
     bootstrap_node: "{{ groups['bootstrap_node'] | first }}"
@@ -25,5 +28,4 @@
 - include_tasks: worker-node.yaml
   when: "'worker_nodes' in group_names"
 
-- include_tasks: keepalived-cluster.yaml
-  when: "'bootstrap_node' in group_names or 'control_plane' in group_names"
+
