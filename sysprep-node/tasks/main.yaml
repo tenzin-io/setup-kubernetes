@@ -14,10 +14,6 @@
 - name: System prep for Kubernetes
   include_tasks: sysprep.yaml
 
-- name: System prep for Nvidia
-  include_tasks: nvidia.yaml
-  when: enable_nvidia_node == true
-
 - name: Setup runc
   include_tasks: runc.yaml
 
