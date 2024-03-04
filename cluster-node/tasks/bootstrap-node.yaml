@@ -6,6 +6,11 @@
     path: /etc/hosts
     regexp: '.* {{ control_plane_endpoint_name }}$'
     line: "{{ control_plane_endpoint_address }}  {{ control_plane_endpoint_name }}"
+
+- name: Create /etc/kubernetes folder
+  file:
+    path: /etc/kubernetes
+    state: directory
   
 - name: Send over kubeadm config file
   template:
