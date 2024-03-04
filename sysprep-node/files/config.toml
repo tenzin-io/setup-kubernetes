@@ -57,7 +57,7 @@ version = 2
     enable_unprivileged_icmp = false
     enable_unprivileged_ports = false
     ignore_image_defined_volumes = false
-    image_pull_progress_timeout = "1m0s"
+    image_pull_progress_timeout = "5m0s"
     max_concurrent_downloads = 3
     max_container_log_line_size = 16384
     netns_mounts_under_state_dir = false
@@ -217,6 +217,12 @@ version = 2
   [plugins."io.containerd.snapshotter.v1.aufs"]
     root_path = ""
 
+  [plugins."io.containerd.snapshotter.v1.blockfile"]
+    fs_type = ""
+    mount_options = []
+    root_path = ""
+    scratch_file = ""
+
   [plugins."io.containerd.snapshotter.v1.btrfs"]
     root_path = ""
 
@@ -233,7 +239,9 @@ version = 2
     root_path = ""
 
   [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    mount_options = []
     root_path = ""
+    sync_remove = false
     upperdir_label = false
 
   [plugins."io.containerd.snapshotter.v1.zfs"]
@@ -245,6 +253,14 @@ version = 2
     protocol = ""
 
   [plugins."io.containerd.transfer.v1.local"]
+    config_path = ""
+    max_concurrent_downloads = 3
+    max_concurrent_uploaded_layers = 3
+
+    [[plugins."io.containerd.transfer.v1.local".unpack_config]]
+      differ = ""
+      platform = "linux/amd64"
+      snapshotter = "overlayfs"
 
 [proxy_plugins]
 
