@@ -46,6 +46,13 @@
     remote_src: yes
   when: ansible_machine == "x86_64"
 
+- name: Extract crictl tarball x86_64
+  unarchive:
+    src: "https://github.com/kubernetes-sigs/cri-tools/releases/download/v{{ crictl_version }}/crictl-v{{ crictl_version }}-linux-arm64.tar.gz"
+    dest: /usr/local/bin
+    remote_src: yes
+  when: ansible_machine == "aarch64"
+
 - name: crictl.yaml
   copy:
     src: crictl.yaml
