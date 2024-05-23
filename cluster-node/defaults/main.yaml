@@ -6,3 +6,6 @@ service_network_cidr: 10.254.0.0/16
 # keepalived
 keepalived_router_id: 100
 keepalived_cluster_password: clusterpass
+
+# bootstrap node
+skip_phase_mark_control_plane: False
